@@ -51,6 +51,33 @@
             color: white;
             padding: 3rem 2rem;
             text-align: center;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .back-btn svg {
+            width: 18px;
+            height: 18px;
         }
 
         header h1 {
@@ -715,11 +742,58 @@
             font-size: 0.9rem;
             font-style: italic;
         }
+
+        /* Download button */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(139, 92, 246, 0.4);
+        }
+
+        .download-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .download-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--gray-300);
+        }
+
+        .download-section p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
+            <a href="index.html" class="back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Home
+            </a>
             <h1>Student Writing Toolkit</h1>
         </header>
 
@@ -1170,6 +1244,16 @@
                 </table>
 
                 <p><strong>Before every submission:</strong> Scan this list. Check for these specific errors.</p>
+
+                <div class="download-section">
+                    <a href="Common_Errors_Tracker.csv" download class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Tracker (CSV)
+                    </a>
+                    <p>Open in Google Sheets or Excel to track your errors over time.</p>
+                </div>
             </section>
 
             <!-- Part 8: Essay Structure -->
@@ -1290,6 +1374,16 @@
                     <div class="growth-field">
                         <label>One thing I've improved recently:</label>
                         <div class="line"></div>
+                    </div>
+
+                    <div class="download-section" style="border-top-color: rgba(5, 150, 105, 0.3);">
+                        <a href="Writing_Goals_Tracker.csv" download class="download-btn" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); box-shadow: 0 2px 4px rgba(5, 150, 105, 0.3);">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Download Goals Tracker (CSV)
+                        </a>
+                        <p>Track your weekly goals in Google Sheets or Excel.</p>
                     </div>
                 </div>
             </section>
