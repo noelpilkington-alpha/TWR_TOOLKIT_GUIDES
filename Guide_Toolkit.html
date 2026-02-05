@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaWrite Guide Toolkit</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #16a34a;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--gray-50);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        header .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+        }
+
+        h3 {
+            color: var(--gray-800);
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        h4 {
+            color: var(--gray-700);
+            font-size: 1.1rem;
+            margin: 1rem 0 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--gray-700);
+        }
+
+        ul, ol {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--gray-700);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .role-contract {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .role-contract h2 {
+            color: #92400e;
+            border-color: #92400e;
+        }
+
+        .do-dont-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .do-dont-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .do-box {
+            background: #dcfce7;
+            border: 2px solid var(--success);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .do-box h3 {
+            color: var(--success);
+            margin-top: 0;
+        }
+
+        .dont-box {
+            background: #fee2e2;
+            border: 2px solid var(--danger);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .dont-box h3 {
+            color: var(--danger);
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: var(--gray-100);
+            color: var(--gray-800);
+            font-weight: 600;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid var(--gray-300);
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background: var(--gray-50);
+        }
+
+        .script-box {
+            background: var(--gray-100);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .script-box strong {
+            color: var(--gray-800);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .script-box .response {
+            color: var(--primary);
+            font-style: italic;
+        }
+
+        .pattern-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .pattern-card h4 {
+            color: var(--primary);
+            font-size: 1.15rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+
+        .pattern-section {
+            margin: 1rem 0;
+        }
+
+        .pattern-section h5 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .can-do {
+            background: #f0fdf4;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+
+        .cannot-do {
+            background: #fef2f2;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+
+        .routine-box {
+            background: var(--gray-800);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .routine-box .step {
+            margin: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .routine-box .step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            color: var(--warning);
+            font-weight: bold;
+        }
+
+        .routine-box .sub {
+            margin-left: 1.5rem;
+            color: var(--gray-300);
+            font-size: 0.85rem;
+        }
+
+        .prompt-table {
+            background: white;
+        }
+
+        .prompt-table td:first-child {
+            color: var(--danger);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .prompt-table td:last-child {
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .mantra {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin: 1.5rem 0;
+        }
+
+        .quick-ref {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .quick-ref {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ref-card {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .ref-card h4 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .ref-card ol {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .ref-card li {
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .say-card {
+            border-left: 4px solid var(--success);
+        }
+
+        .never-card {
+            border-left: 4px solid var(--danger);
+        }
+
+        .escalation-box {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .twr-info {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .twr-info p {
+            font-size: 0.95rem;
+        }
+
+        .note-box {
+            background: #eff6ff;
+            border: 1px solid #93c5fd;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .note-box strong {
+            color: var(--primary);
+        }
+
+        footer {
+            background: var(--gray-100);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AlphaWrite Guide Toolkit</h1>
+            <div class="subtitle">Motivation & Habits Playbook</div>
+        </header>
+
+        <main>
+            <!-- Role Contract Section -->
+            <section class="role-contract">
+                <h2>The Guide Role Contract</h2>
+
+                <p><strong>Guides motivate students and enforce habits.</strong> You are not responsible for teaching writing skills—that's what the AlphaWrite curriculum does.</p>
+
+                <div class="do-dont-grid">
+                    <div class="do-box">
+                        <h3>What Guides Do</h3>
+                        <ul>
+                            <li>Hold students accountable to the process</li>
+                            <li>Build consistent habits around planning, revising, and using feedback</li>
+                            <li>Keep students engaged and moving forward</li>
+                            <li>Celebrate progress and effort</li>
+                            <li>Redirect students to course materials when they need instruction</li>
+                        </ul>
+                    </div>
+                    <div class="dont-box">
+                        <h3>What Guides Do NOT Do</h3>
+                        <ul>
+                            <li>Teach sentence structure</li>
+                            <li>Explain how to elaborate</li>
+                            <li>Tell students what to write</li>
+                            <li>Fix their writing for them</li>
+                            <li>Diagnose grammar issues</li>
+                            <li>Give content suggestions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Boundary Scripts</h3>
+                <p>When students ask for writing help, use these redirects:</p>
+
+                <div class="script-box">
+                    <strong>"How do I start this paragraph?"</strong>
+                    <span class="response">"Let's look at your outline. What does your topic sentence say?"</span>
+                </div>
+
+                <div class="script-box">
+                    <strong>"Is this sentence good?"</strong>
+                    <span class="response">"Read it aloud. Does it sound complete to you?"</span>
+                </div>
+
+                <div class="script-box">
+                    <strong>"What should I write next?"</strong>
+                    <span class="response">"Check your plan—what's your next point?"</span>
+                </div>
+
+                <div class="script-box">
+                    <strong>"I don't understand elaboration."</strong>
+                    <span class="response">"The Student Toolkit has a section on that. Let's pull it up."</span>
+                </div>
+
+                <div class="script-box">
+                    <strong>"Can you help me fix this?"</strong>
+                    <span class="response">"Use your revision checklist first, then show me what you changed."</span>
+                </div>
+
+                <div class="script-box">
+                    <strong>When a student genuinely needs instruction:</strong>
+                    <span class="response">Route them to: the AlphaWrite course lesson, the Student Toolkit, or flag for escalation to an academic coach.</span>
+                </div>
+            </section>
+
+            <!-- TWR Background Section -->
+            <section>
+                <h2>TWR Background</h2>
+                <p><em>For Guide Context Only</em></p>
+
+                <div class="twr-info">
+                    <p>This section helps you understand what students are learning. <strong>You will not teach this material</strong>—it's context so you can recognize when students are using (or skipping) their tools.</p>
+                </div>
+
+                <h3>The TWR System in Brief</h3>
+                <p>The Writing Revolution method teaches writing through:</p>
+                <ol>
+                    <li><strong>Sentence-level skills</strong> — Building strong, complete sentences</li>
+                    <li><strong>Planning tools</strong> — SPOs (Single Paragraph Outlines) and MPOs (Multiple Paragraph Outlines)</li>
+                    <li><strong>Structured revision</strong> — Systematic editing using checklists</li>
+                    <li><strong>Incremental practice</strong> — Short, frequent writing beats long, rare assignments</li>
+                </ol>
+
+                <h3>Why Planning Matters</h3>
+                <p>Students who skip planning: get stuck staring at blank screens, write scattered paragraphs, take longer to finish, and produce weaker work.</p>
+                <p><strong>Your role:</strong> Enforce that planning happens before drafting. Don't teach how to plan—just require that the plan exists.</p>
+
+                <h3>Why Revision Matters</h3>
+                <p>Students who skip revision: lose points to careless errors, miss opportunities to strengthen ideas, and never internalize good habits.</p>
+                <p><strong>Your role:</strong> Enforce that revision happens before submission. Don't teach what to revise—just require that revision occurs.</p>
+
+                <h3>Recommended Reading (Optional)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Chapter</th>
+                            <th>What It Covers</th>
+                            <th>Why It Helps You</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ch. 1</td>
+                            <td>System overview</td>
+                            <td>Mental model of the whole approach</td>
+                        </tr>
+                        <tr>
+                            <td>Ch. 7</td>
+                            <td>Single-paragraph planning</td>
+                            <td>Understand what SPOs look like</td>
+                        </tr>
+                        <tr>
+                            <td>Ch. 8</td>
+                            <td>Multi-paragraph planning</td>
+                            <td>Understand what MPOs look like</td>
+                        </tr>
+                        <tr>
+                            <td>Ch. 9</td>
+                            <td>Revision</td>
+                            <td>Understand why revision is structured</td>
+                        </tr>
+                        <tr>
+                            <td>Ch. 11</td>
+                            <td>The writing process</td>
+                            <td>See how it all fits together</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="note-box">
+                    <strong>Note:</strong> Chapters 2-6 cover sentence-level instruction. These explain what students learn in the curriculum, but they are NOT things guides will teach. Read them only if curious about the method.
+                </div>
+            </section>
+
+            <!-- Behavior Patterns Section -->
+            <section>
+                <h2>Behavior Patterns You Can Influence</h2>
+                <p>These are the common ways students struggle. Your role is to influence the <strong>behavior</strong>, not fix the <strong>writing</strong>.</p>
+
+                <div class="pattern-card">
+                    <h4>Pattern 1: Skipping Planning</h4>
+
+                    <div class="pattern-section">
+                        <h5>What You'll See</h5>
+                        <ul>
+                            <li>Student jumps straight to drafting</li>
+                            <li>"I don't need an outline"</li>
+                            <li>Disorganized paragraphs, scattered ideas</li>
+                        </ul>
+                    </div>
+
+                    <div class="can-do">
+                        <h5>What You Can Do</h5>
+                        <ul>
+                            <li>Require the plan before they draft: "Show me your completed SPO."</li>
+                            <li>Make it a gate: "I see you're ready to write. Can I see your outline first?"</li>
+                            <li>Reframe planning as a shortcut: "Writers who plan finish faster."</li>
+                        </ul>
+                    </div>
+
+                    <div class="cannot-do">
+                        <h5>What You Cannot Do</h5>
+                        <ul>
+                            <li>Fill out the outline for them</li>
+                            <li>Tell them what their supporting details should be</li>
+                            <li>Explain how to write a topic sentence</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pattern-card">
+                    <h4>Pattern 2: Rushing / Not Revising</h4>
+
+                    <div class="pattern-section">
+                        <h5>What You'll See</h5>
+                        <ul>
+                            <li>Submits immediately after drafting</li>
+                            <li>Careless errors (spelling, missing words, capitalization)</li>
+                            <li>"I'm done!" (too quickly)</li>
+                        </ul>
+                    </div>
+
+                    <div class="can-do">
+                        <h5>What You Can Do</h5>
+                        <ul>
+                            <li>Enforce a pause: "Before you submit, do a slow reread from the top."</li>
+                            <li>Require checklist use: "Walk through CUPS, then show me you're ready."</li>
+                            <li>Build in a speed bump: "Take 30 seconds. Find one thing to fix."</li>
+                        </ul>
+                    </div>
+
+                    <div class="cannot-do">
+                        <h5>What You Cannot Do</h5>
+                        <ul>
+                            <li>Point out specific errors</li>
+                            <li>Edit their work</li>
+                            <li>Tell them what word is misspelled</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pattern-card">
+                    <h4>Pattern 3: Ignoring Feedback</h4>
+
+                    <div class="pattern-section">
+                        <h5>What You'll See</h5>
+                        <ul>
+                            <li>Same errors repeated across assignments</li>
+                            <li>Doesn't implement suggestions</li>
+                            <li>Treats feedback as "done" once read</li>
+                        </ul>
+                    </div>
+
+                    <div class="can-do">
+                        <h5>What You Can Do</h5>
+                        <ul>
+                            <li>Require action: "What's one change you'll make based on this feedback?"</li>
+                            <li>Require logging: "Add this to your Common Errors list."</li>
+                            <li>Check follow-through: "Last time you got feedback on X. Show me how you addressed it this time."</li>
+                        </ul>
+                    </div>
+
+                    <div class="cannot-do">
+                        <h5>What You Cannot Do</h5>
+                        <ul>
+                            <li>Explain what the feedback means</li>
+                            <li>Show them how to fix it</li>
+                            <li>Rewrite the sentence for them</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pattern-card">
+                    <h4>Pattern 4: Stopping Too Soon (Thin Paragraphs)</h4>
+
+                    <div class="pattern-section">
+                        <h5>What You'll See</h5>
+                        <ul>
+                            <li>Paragraphs with only 1-2 sentences</li>
+                            <li>Supporting details without explanation</li>
+                            <li>"I said everything I wanted to say"</li>
+                        </ul>
+                    </div>
+
+                    <div class="can-do">
+                        <h5>What You Can Do</h5>
+                        <ul>
+                            <li>Prompt extension: "Take your idea one step further before you're done."</li>
+                            <li>Point to the plan: "Your outline shows three details. I see one. What about the others?"</li>
+                            <li>Use the Student Toolkit: "Check the 'So What?' section in your toolkit."</li>
+                        </ul>
+                    </div>
+
+                    <div class="cannot-do">
+                        <h5>What You Cannot Do</h5>
+                        <ul>
+                            <li>Tell them what to add</li>
+                            <li>Explain elaboration techniques</li>
+                            <li>Suggest specific examples or reasons</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Habit Routines Section -->
+            <section>
+                <h2>Habit Routines</h2>
+
+                <h3>The Core Routine: Plan → Draft → Revise → Reflect</h3>
+                <p>Every writing session should follow this sequence. Your job is to keep students on the routine.</p>
+
+                <div class="routine-box">
+                    <div class="step" data-step="1.">PLAN</div>
+                    <div class="sub">"Is your outline complete? Show me."</div>
+
+                    <div class="step" data-step="2.">DRAFT</div>
+                    <div class="sub">"Write from your plan. I'm here if you get stuck."</div>
+
+                    <div class="step" data-step="3.">REVISE</div>
+                    <div class="sub">"Before you submit: slow reread, then CUPS checklist."</div>
+
+                    <div class="step" data-step="4.">REFLECT</div>
+                    <div class="sub">"What's one thing you did well? One thing to work on next time?"</div>
+                </div>
+
+                <h3>Session Structure</h3>
+
+                <div class="routine-box">
+                    <div class="step" data-step="→">WARM-UP (2-3 min)</div>
+                    <div class="sub">Mindset reset: "What's your focus today?"</div>
+                    <div class="sub">Review: "Any feedback from last time to address?"</div>
+
+                    <div class="step" data-step="→">GOAL SETTING (1-2 min)</div>
+                    <div class="sub">Choose one habit focus:</div>
+                    <div class="sub">□ Complete planning before drafting</div>
+                    <div class="sub">□ Use revision checklist before submitting</div>
+                    <div class="sub">□ Apply one piece of prior feedback</div>
+                    <div class="sub">□ Slow down and reread</div>
+
+                    <div class="step" data-step="→">WORK TIME (15-25 min)</div>
+                    <div class="sub">Student works; guide monitors the routine</div>
+                    <div class="sub">Prompt compliance, not content</div>
+
+                    <div class="step" data-step="→">CLOSE (2-3 min)</div>
+                    <div class="sub">Reflect: "Did you hit your habit goal?"</div>
+                    <div class="sub">Set next goal: "What will you focus on next session?"</div>
+                </div>
+            </section>
+
+            <!-- Motivation Prompts Section -->
+            <section>
+                <h2>Motivation Prompts by Phase</h2>
+
+                <h3>Before Writing</h3>
+                <table class="prompt-table">
+                    <thead>
+                        <tr>
+                            <th>Instead of...</th>
+                            <th>Say...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"What's your topic sentence?"</td>
+                            <td>"Is your plan complete?"</td>
+                        </tr>
+                        <tr>
+                            <td>"What are your three reasons?"</td>
+                            <td>"Show me your outline before you start."</td>
+                        </tr>
+                        <tr>
+                            <td>"Let me help you brainstorm"</td>
+                            <td>"Use your planning tool first, then we'll check in."</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>During Writing</h3>
+                <table class="prompt-table">
+                    <thead>
+                        <tr>
+                            <th>Instead of...</th>
+                            <th>Say...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"Add a 'because' here"</td>
+                            <td>"Check your plan—are you on track?"</td>
+                        </tr>
+                        <tr>
+                            <td>"What example could you use?"</td>
+                            <td>"Your toolkit has prompts if you're stuck."</td>
+                        </tr>
+                        <tr>
+                            <td>"This needs more detail"</td>
+                            <td>"Take your idea one step further."</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>After Writing (Revision)</h3>
+                <table class="prompt-table">
+                    <thead>
+                        <tr>
+                            <th>Instead of...</th>
+                            <th>Say...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"Circle your topic sentence"</td>
+                            <td>"Walk through your checklist."</td>
+                        </tr>
+                        <tr>
+                            <td>"You're missing elaboration here"</td>
+                            <td>"Do a slow reread from the top."</td>
+                        </tr>
+                        <tr>
+                            <td>"This word is spelled wrong"</td>
+                            <td>"Run through CUPS before you submit."</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>After Feedback</h3>
+                <table class="prompt-table">
+                    <thead>
+                        <tr>
+                            <th>Instead of...</th>
+                            <th>Say...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"This feedback means you should..."</td>
+                            <td>"What's one change you'll make?"</td>
+                        </tr>
+                        <tr>
+                            <td>"Here's how to fix that"</td>
+                            <td>"Where in your writing will you make a change?"</td>
+                        </tr>
+                        <tr>
+                            <td>"Let me show you"</td>
+                            <td>"Log this in your Common Errors list."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Motivational Strategies Section -->
+            <section>
+                <h2>Motivational Strategies</h2>
+
+                <h3>For Reluctant Writers</h3>
+                <ul>
+                    <li>Connect to their interests (AlphaWrite's strength)</li>
+                    <li>Start with the smallest step: "Just get your outline done first."</li>
+                    <li>Acknowledge the feeling: "I know writing feels hard. Let's just focus on the plan."</li>
+                    <li>Celebrate completion of process steps, not just quality</li>
+                </ul>
+
+                <h3>For Perfectionists</h3>
+                <ul>
+                    <li>Emphasize that first drafts are supposed to be rough</li>
+                    <li>Time-box drafting: "Write for 10 minutes, then we'll look at revision."</li>
+                    <li>Separate drafting from editing: "Right now, just get ideas down."</li>
+                </ul>
+
+                <h3>For "I'm Bad at Writing" Mindset</h3>
+                <ul>
+                    <li>Point to process, not talent: "Writing is a skill. Skills improve with practice."</li>
+                    <li>Highlight specific progress: "Last week, you skipped the outline. This week, you used it."</li>
+                    <li>Normalize struggle: "Every writer finds this hard. You're doing the work."</li>
+                </ul>
+
+                <h3>For "I'm Done" (Too Fast)</h3>
+                <ul>
+                    <li>Build in the speed bump: "Before you submit, 30 seconds of slow reading."</li>
+                    <li>Make revision part of "done": "You're not done until you've run through CUPS."</li>
+                    <li>Reframe: "The revision step is where good becomes great."</li>
+                </ul>
+            </section>
+
+            <!-- Escalation Section -->
+            <section>
+                <h2>Escalation Protocol</h2>
+
+                <div class="escalation-box">
+                    <h3>When to Escalate</h3>
+                    <p>Route students to additional support when:</p>
+                    <ul>
+                        <li>They consistently cannot complete plans despite using the tools</li>
+                        <li>They don't understand feedback even after consulting their toolkit</li>
+                        <li>They show persistent skill gaps that require instruction</li>
+                        <li>They're significantly behind and need targeted intervention</li>
+                    </ul>
+                </div>
+
+                <h3>How to Escalate</h3>
+                <ol>
+                    <li>Document the pattern: "Student has struggled with X for Y sessions"</li>
+                    <li>Note what you've tried: "Enforced planning routine, directed to toolkit"</li>
+                    <li>Flag for academic coach review</li>
+                    <li>Continue motivation support while escalation is processed</li>
+                </ol>
+
+                <h3>What Escalation Is NOT</h3>
+                <ul>
+                    <li>A guide giving up</li>
+                    <li>A sign of failure</li>
+                    <li>Something to avoid</li>
+                </ul>
+                <p><strong>Escalation is appropriate routing.</strong> Guides are not instructors. When instruction is needed, route to instruction.</p>
+            </section>
+
+            <!-- Quick Reference Section -->
+            <section>
+                <h2>Quick Reference</h2>
+
+                <div class="mantra">
+                    "Enforce the routine. Require the tools. Redirect to resources. Celebrate the effort."
+                </div>
+
+                <div class="quick-ref">
+                    <div class="ref-card say-card">
+                        <h4>Five Things to Say Every Session</h4>
+                        <ol>
+                            <li>"Show me your plan before you draft."</li>
+                            <li>"Do a slow reread before you submit."</li>
+                            <li>"What's one change you'll make from feedback?"</li>
+                            <li>"Take your idea one step further."</li>
+                            <li>"What will you focus on next time?"</li>
+                        </ol>
+                    </div>
+                    <div class="ref-card never-card">
+                        <h4>Five Things to NEVER Say</h4>
+                        <ol>
+                            <li>"Add a [specific sentence element] here."</li>
+                            <li>"Your topic sentence should be..."</li>
+                            <li>"This is how you elaborate..."</li>
+                            <li>"Let me show you how to fix this."</li>
+                            <li>"Here's what you should write..."</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Misconceptions Section -->
+            <section>
+                <h2>Common Misconceptions</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Misconception</th>
+                            <th>Reality</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"If I don't help them write, I'm not helping"</td>
+                            <td>Enforcing habits IS helping—it builds independence</td>
+                        </tr>
+                        <tr>
+                            <td>"They need me to explain this concept"</td>
+                            <td>The curriculum and toolkit explain concepts; you enforce use</td>
+                        </tr>
+                        <tr>
+                            <td>"It's faster if I just tell them"</td>
+                            <td>Short-term faster, long-term harmful—they don't learn the habit</td>
+                        </tr>
+                        <tr>
+                            <td>"They're stuck, so I should give them ideas"</td>
+                            <td>Being stuck is part of learning; redirect to their plan and tools</td>
+                        </tr>
+                        <tr>
+                            <td>"Motivation isn't enough"</td>
+                            <td>Motivation + habits + good curriculum = student success</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <footer>
+            This toolkit is for AlphaWrite guides. For writing instruction, direct students to AlphaWrite course materials and the Student Toolkit.
+        </footer>
+    </div>
+</body>
+</html>
