@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Writing Toolkit</title>
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #10b981;
+            --accent: #8b5cf6;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        main {
+            padding: 0;
+        }
+
+        /* Quick Start Section - Special styling */
+        .quick-start {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 2.5rem;
+            border-bottom: 4px solid var(--warning);
+        }
+
+        .quick-start h2 {
+            color: #92400e;
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .quick-start .tagline {
+            text-align: center;
+            color: #78350f;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .routine-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .routine-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .routine-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .routine-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .routine-card .step-num {
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .mini-form {
+            background: var(--gray-50);
+            border: 1px dashed var(--gray-300);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        .mini-form div {
+            margin: 0.5rem 0;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .quick-start-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed #d97706;
+        }
+
+        .quick-start-footer p {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        .quick-start-footer .small {
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: #78350f;
+            margin-top: 0.5rem;
+        }
+
+        /* Regular sections */
+        section {
+            padding: 2.5rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+        }
+
+        h3 {
+            color: var(--gray-800);
+            font-size: 1.25rem;
+            margin: 1.75rem 0 1rem;
+        }
+
+        h4 {
+            color: var(--gray-700);
+            font-size: 1.1rem;
+            margin: 1.25rem 0 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--gray-700);
+        }
+
+        ul, ol {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--gray-700);
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        strong {
+            color: var(--gray-800);
+        }
+
+        /* Belief cards */
+        .belief-cards {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .belief-card {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 12px 12px 0;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .belief-card h4 {
+            color: var(--primary-dark);
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .belief-card p {
+            margin: 0;
+            color: var(--gray-700);
+        }
+
+        /* Template boxes */
+        .template-box {
+            background: var(--gray-800);
+            color: #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .template-box .label {
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .template-box .input {
+            color: var(--gray-400);
+            border-bottom: 1px dashed var(--gray-600);
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .template-box .indent {
+            margin-left: 1.5rem;
+        }
+
+        .template-box .sub-indent {
+            margin-left: 3rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 0.75rem 1rem;
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: var(--gray-50);
+        }
+
+        tr:hover {
+            background: #ecfdf5;
+        }
+
+        /* Example boxes */
+        .example-box {
+            margin: 1.5rem 0;
+        }
+
+        .example-weak {
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .example-weak::before {
+            content: "Weak:";
+            font-weight: 600;
+            color: var(--danger);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .example-strong {
+            background: #ecfdf5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-strong::before {
+            content: "Strong:";
+            font-weight: 600;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Sentence starters */
+        .starters-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .starters-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .starter-card {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .starter-card h5 {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .starter-card ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        .starter-card li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Checklist boxes */
+        .check-box {
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .check-box h4 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .check-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .check-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-list li::before {
+            content: "☐";
+            color: var(--primary);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        /* Speed bump section */
+        .speed-bump {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .speed-bump h4 {
+            color: #92400e;
+            margin-top: 0;
+        }
+
+        .speed-bump-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .speed-bump-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .speed-step {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .speed-step .num {
+            background: var(--warning);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .speed-step .title {
+            font-weight: 600;
+            color: var(--gray-800);
+            font-size: 0.85rem;
+        }
+
+        .speed-step .desc {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+
+        /* Feedback routine */
+        .feedback-routine {
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .feedback-routine h4 {
+            color: #5b21b6;
+            margin-top: 0;
+        }
+
+        .feedback-steps {
+            display: grid;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .feedback-step {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feedback-step .num {
+            background: var(--accent);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .feedback-step .content {
+            flex: 1;
+        }
+
+        .feedback-step .title {
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.25rem;
+        }
+
+        .feedback-step .desc {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        /* Error log table */
+        .error-log {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .error-log th {
+            background: var(--accent);
+        }
+
+        .error-log td {
+            height: 48px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .error-log td:first-child {
+            width: 40px;
+            text-align: center;
+            background: var(--gray-50);
+            font-weight: 600;
+            color: var(--gray-600);
+        }
+
+        /* Quick reference cards */
+        .ref-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .ref-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ref-card {
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .ref-card h4 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+            margin-bottom: 1rem;
+        }
+
+        .ref-card ol, .ref-card ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+
+        .ref-card li {
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        /* Blueprint box */
+        .blueprint {
+            background: var(--gray-800);
+            color: #e5e7eb;
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .blueprint .section-title {
+            color: var(--primary-light);
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .blueprint .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .blueprint .item {
+            margin-left: 1.5rem;
+            color: var(--gray-300);
+        }
+
+        /* Growth section */
+        .growth-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .growth-box h4 {
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+
+        .growth-field {
+            margin: 1rem 0;
+        }
+
+        .growth-field label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .growth-field .line {
+            border-bottom: 2px solid var(--gray-300);
+            height: 32px;
+        }
+
+        /* Remember section */
+        .remember {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2.5rem;
+            text-align: center;
+            margin: 0;
+        }
+
+        .remember h2 {
+            color: white;
+            border-color: rgba(255,255,255,0.3);
+            margin-bottom: 1.5rem;
+        }
+
+        .remember p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 1rem;
+        }
+
+        .remember ol {
+            display: inline-block;
+            text-align: left;
+            color: white;
+            font-size: 1.1rem;
+            margin: 1.5rem 0;
+        }
+
+        .remember .final {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            color: white;
+        }
+
+        footer {
+            background: var(--gray-100);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Writing Toolkit</h1>
+        </header>
+
+        <main>
+            <!-- Quick Start Section -->
+            <div class="quick-start">
+                <h2>QUICK START: Do This Every Time</h2>
+                <p class="tagline">This one page is all you need to get started. The rest of the toolkit goes deeper.</p>
+
+                <div class="routine-grid">
+                    <div class="routine-card">
+                        <h3><span class="step-num">1</span> PLAN (before you write)</h3>
+                        <p><strong>Minimum:</strong> Topic + 2 supports + 1 "so what"</p>
+                        <div class="mini-form">
+                            <div>Topic: _______________________</div>
+                            <div>Support 1: ____________________</div>
+                            <div>Support 2: ____________________</div>
+                            <div>So what? ______________________</div>
+                        </div>
+                        <p style="font-size: 0.85rem; margin-top: 0.75rem; color: var(--gray-600);"><strong>Stuck?</strong> Upgrade to the full SPO (Part 2).</p>
+                    </div>
+
+                    <div class="routine-card">
+                        <h3><span class="step-num">2</span> DRAFT (write from your plan)</h3>
+                        <ul class="checklist">
+                            <li>Follow your outline point by point</li>
+                            <li>Don't worry about perfection</li>
+                            <li>If stuck, use "because/but/so" (Part 3)</li>
+                        </ul>
+                    </div>
+
+                    <div class="routine-card">
+                        <h3><span class="step-num">3</span> REVISE (before you submit)</h3>
+                        <p><strong>The Speed-Bump:</strong></p>
+                        <ul class="checklist">
+                            <li>10-second pause (step away)</li>
+                            <li>Slow reread from the top</li>
+                            <li>Find and fix ONE obvious thing</li>
+                            <li>Run through CUPS</li>
+                        </ul>
+                    </div>
+
+                    <div class="routine-card">
+                        <h3><span class="step-num">4</span> USE FEEDBACK</h3>
+                        <p><strong>20-Second Routine:</strong></p>
+                        <ul class="checklist">
+                            <li>What is feedback asking me to change?</li>
+                            <li>Where will I change it?</li>
+                            <li>Make ONE change</li>
+                            <li>Log the lesson (Part 7)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quick-start-footer">
+                    <p>Plan → Draft → Revise → Use Feedback</p>
+                    <p class="small">For deeper explanations, keep reading.</p>
+                </div>
+            </div>
+
+            <!-- Part 1: Mindset -->
+            <section>
+                <h2>Part 1: The Writer's Mindset</h2>
+
+                <div class="belief-cards">
+                    <div class="belief-card">
+                        <h4>1. Planning is not extra work—it's a shortcut</h4>
+                        <p>Writers who plan finish faster, write better, and don't get stuck. Skipping the plan means staring at a blank screen. The plan tells you exactly what to write.</p>
+                    </div>
+                    <div class="belief-card">
+                        <h4>2. First drafts are supposed to be messy</h4>
+                        <p>No one writes perfectly the first time. The goal of a first draft is to get ideas down. Revision is where good writing becomes great.</p>
+                    </div>
+                    <div class="belief-card">
+                        <h4>3. Feedback is fuel, not criticism</h4>
+                        <p>Feedback shows you exactly what to improve. If you apply it, you get better. If you ignore it, you make the same mistakes.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 2: Planning Tools -->
+            <section>
+                <h2>Part 2: Planning Tools</h2>
+
+                <h3>Minimum Viable Plan (Quick Version)</h3>
+                <p>When you're short on time or the assignment is simple:</p>
+
+                <div class="template-box">
+                    <div><span class="label">TOPIC SENTENCE:</span> What's the main point?</div>
+                    <div>→ <span class="input"></span></div>
+                    <br>
+                    <div><span class="label">SUPPORT 1:</span> First reason/evidence?</div>
+                    <div>→ <span class="input"></span></div>
+                    <br>
+                    <div><span class="label">SUPPORT 2:</span> Second reason/evidence?</div>
+                    <div>→ <span class="input"></span></div>
+                    <br>
+                    <div><span class="label">SO WHAT?</span> Why does this matter?</div>
+                    <div>→ <span class="input"></span></div>
+                </div>
+
+                <p>If you get stuck while writing, upgrade to the full SPO.</p>
+
+                <h3>Full SPO (Single Paragraph Outline)</h3>
+                <p>Use this for any paragraph that matters:</p>
+
+                <div class="template-box">
+                    <div><span class="label">TOPIC SENTENCE:</span> What is the main point of this paragraph?</div>
+                    <div>→ <span class="input"></span></div>
+                    <br>
+                    <div><span class="label">SUPPORTING DETAIL #1:</span> What's one piece of evidence or reason?</div>
+                    <div>→ <span class="input"></span></div>
+                    <div class="indent"><span class="label">ELABORATION:</span> Why does this matter? So what?</div>
+                    <div class="indent">→ <span class="input"></span></div>
+                    <br>
+                    <div><span class="label">SUPPORTING DETAIL #2:</span> What's another piece of evidence?</div>
+                    <div>→ <span class="input"></span></div>
+                    <div class="indent"><span class="label">ELABORATION:</span> Why does this matter? So what?</div>
+                    <div class="indent">→ <span class="input"></span></div>
+                    <br>
+                    <div><span class="label">SUPPORTING DETAIL #3:</span> What's a third piece of evidence?</div>
+                    <div>→ <span class="input"></span></div>
+                    <div class="indent"><span class="label">ELABORATION:</span> Why does this matter? So what?</div>
+                    <div class="indent">→ <span class="input"></span></div>
+                    <br>
+                    <div><span class="label">CONCLUDING SENTENCE:</span> How do you wrap up this paragraph?</div>
+                    <div>→ <span class="input"></span></div>
+                </div>
+
+                <h3>MPO (Multiple Paragraph Outline)</h3>
+                <p>For essays with multiple paragraphs:</p>
+
+                <div class="template-box">
+                    <div><span class="label">THESIS:</span> Your main argument + 2-3 reasons</div>
+                    <div>→ <span class="input"></span></div>
+                    <br>
+                    <div><span class="label">BODY PARAGRAPH 1</span></div>
+                    <div class="indent">Topic Sentence: <span class="input" style="min-width: 150px;"></span></div>
+                    <div class="indent">Supporting Details: <span class="input" style="min-width: 150px;"></span></div>
+                    <div class="indent">Elaboration: <span class="input" style="min-width: 150px;"></span></div>
+                    <br>
+                    <div><span class="label">BODY PARAGRAPH 2</span></div>
+                    <div class="indent">Topic Sentence: <span class="input" style="min-width: 150px;"></span></div>
+                    <div class="indent">Supporting Details: <span class="input" style="min-width: 150px;"></span></div>
+                    <div class="indent">Elaboration: <span class="input" style="min-width: 150px;"></span></div>
+                    <br>
+                    <div><span class="label">BODY PARAGRAPH 3</span></div>
+                    <div class="indent">Topic Sentence: <span class="input" style="min-width: 150px;"></span></div>
+                    <div class="indent">Supporting Details: <span class="input" style="min-width: 150px;"></span></div>
+                    <div class="indent">Elaboration: <span class="input" style="min-width: 150px;"></span></div>
+                    <br>
+                    <div><span class="label">CONCLUSION</span></div>
+                    <div class="indent">Restate thesis: <span class="input" style="min-width: 150px;"></span></div>
+                    <div class="indent">Summary: <span class="input" style="min-width: 150px;"></span></div>
+                    <div class="indent">Final thought: <span class="input" style="min-width: 150px;"></span></div>
+                </div>
+            </section>
+
+            <!-- Part 3: When You're Stuck -->
+            <section>
+                <h2>Part 3: When You're Stuck</h2>
+
+                <h3>The Because-But-So Technique</h3>
+                <p>These three words unlock ideas when you don't know what to write:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Word</th>
+                            <th>What it does</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>BECAUSE</strong></td>
+                            <td>Explains why</td>
+                            <td>"Video games can be educational <strong>because</strong> they develop problem-solving skills."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BUT</strong></td>
+                            <td>Shows the other side</td>
+                            <td>"Video games can be educational, <strong>but</strong> excessive playing can interfere with other activities."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SO</strong></td>
+                            <td>Shows the result</td>
+                            <td>"Video games develop problem-solving skills, <strong>so</strong> they may improve performance in math and science."</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Try this:</strong> Take any sentence you've written. Add "because," "but," or "so" to make it stronger.</p>
+
+                <h3>Sentence Starters</h3>
+                <p>When you don't know how to begin, grab one:</p>
+
+                <div class="starters-grid">
+                    <div class="starter-card">
+                        <h5>To give an example:</h5>
+                        <ul>
+                            <li>For example, ...</li>
+                            <li>One illustration of this is ...</li>
+                            <li>This can be seen when ...</li>
+                        </ul>
+                    </div>
+                    <div class="starter-card">
+                        <h5>To explain further:</h5>
+                        <ul>
+                            <li>This means that ...</li>
+                            <li>In other words, ...</li>
+                            <li>This is important because ...</li>
+                        </ul>
+                    </div>
+                    <div class="starter-card">
+                        <h5>To show contrast:</h5>
+                        <ul>
+                            <li>However, ...</li>
+                            <li>On the other hand, ...</li>
+                            <li>Although some might argue ...</li>
+                        </ul>
+                    </div>
+                    <div class="starter-card">
+                        <h5>To conclude:</h5>
+                        <ul>
+                            <li>Therefore, ...</li>
+                            <li>As a result, ...</li>
+                            <li>In summary, ...</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 4: Elaboration -->
+            <section>
+                <h2>Part 4: Elaboration—The "So What?" Skill</h2>
+
+                <h3>The Problem</h3>
+                <p>Most students write supporting details but don't explain them.</p>
+
+                <div class="example-box">
+                    <div class="example-weak">
+                        "Dogs are loyal."<br>
+                        <span style="font-size: 0.85rem; color: var(--gray-600);">(OK, but so what?)</span>
+                    </div>
+                    <div class="example-strong">
+                        "Dogs are loyal. This means they provide consistent emotional support, which can help people who live alone feel less isolated."<br>
+                        <span style="font-size: 0.85rem; color: var(--gray-600);">(Now I understand why it matters.)</span>
+                    </div>
+                </div>
+
+                <h3>Three Ways to Elaborate</h3>
+                <p>After each supporting detail, ask yourself one of these questions:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>What it does</th>
+                            <th>Example Starter</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>"So what?"</strong></td>
+                            <td>Shows significance</td>
+                            <td>"This matters because..."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>"Because..."</strong></td>
+                            <td>Gives the reason</td>
+                            <td>"This happens because..."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>"This shows that..."</strong></td>
+                            <td>Interprets the evidence</td>
+                            <td>"This shows that..."</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Practice:</strong> Take any fact or detail. Answer "So what?" in one sentence. That's elaboration.</p>
+            </section>
+
+            <!-- Part 5: Paragraph Structure -->
+            <section>
+                <h2>Part 5: Paragraph Structure</h2>
+
+                <h3>Every Paragraph Needs 3 Things</h3>
+                <ol>
+                    <li><strong>Topic Sentence</strong> — First sentence. States the main point.</li>
+                    <li><strong>Supporting Details + Elaboration</strong> — Evidence + explanation of why it matters.</li>
+                    <li><strong>Concluding Sentence</strong> — Wraps up the paragraph (not just "The End").</li>
+                </ol>
+
+                <div class="check-box">
+                    <h4>Paragraph Self-Check</h4>
+                    <p>Before you call a paragraph done:</p>
+                    <ul class="check-list">
+                        <li>Does my first sentence clearly state the main point?</li>
+                        <li>Do I have at least 2-3 supporting details?</li>
+                        <li>Did I explain WHY each detail matters (elaboration)?</li>
+                        <li>Does my last sentence wrap up the paragraph?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Part 6: Revision -->
+            <section>
+                <h2>Part 6: Revision</h2>
+
+                <div class="speed-bump">
+                    <h4>The Speed-Bump Ritual</h4>
+                    <p><strong>Do this EVERY time before you submit.</strong></p>
+
+                    <div class="speed-bump-steps">
+                        <div class="speed-step">
+                            <div class="num">1</div>
+                            <div class="title">PAUSE</div>
+                            <div class="desc">Stop. Take 10 seconds. Step away mentally.</div>
+                        </div>
+                        <div class="speed-step">
+                            <div class="num">2</div>
+                            <div class="title">SLOW REREAD</div>
+                            <div class="desc">Read from the top. Slower than feels natural.</div>
+                        </div>
+                        <div class="speed-step">
+                            <div class="num">3</div>
+                            <div class="title">FIX ONE THING</div>
+                            <div class="desc">Find ONE obvious problem. There's always one.</div>
+                        </div>
+                        <div class="speed-step">
+                            <div class="num">4</div>
+                            <div class="title">CUPS CHECK</div>
+                            <div class="desc">Caps, Usage, Punctuation, Spelling</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>ARMS (Big Picture Revision)</h3>
+                <p>Use this when you have more time:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Letter</th>
+                            <th>Question</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>A</strong></td>
+                            <td>What's missing?</td>
+                            <td>ADD more detail</td>
+                        </tr>
+                        <tr>
+                            <td><strong>R</strong></td>
+                            <td>What's off-topic or repeated?</td>
+                            <td>REMOVE it</td>
+                        </tr>
+                        <tr>
+                            <td><strong>M</strong></td>
+                            <td>Is everything in the right order?</td>
+                            <td>MOVE things</td>
+                        </tr>
+                        <tr>
+                            <td><strong>S</strong></td>
+                            <td>Where can I use better words?</td>
+                            <td>SUBSTITUTE</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>The Read-Aloud Trick</h3>
+                <p><strong>Read your writing out loud.</strong></p>
+                <p>When you read silently, your brain auto-corrects errors. When you read aloud, you hear:</p>
+                <ul>
+                    <li>Awkward sentences</li>
+                    <li>Missing words</li>
+                    <li>Run-ons</li>
+                    <li>Spots that need more explanation</li>
+                </ul>
+                <p>If you can't read aloud, whisper it or mouth the words.</p>
+            </section>
+
+            <!-- Part 7: Using Feedback -->
+            <section>
+                <h2>Part 7: Using Feedback</h2>
+
+                <div class="feedback-routine">
+                    <h4>The 20-Second Feedback Routine</h4>
+                    <p>When you get feedback, don't just read it—<strong>use it</strong>.</p>
+
+                    <div class="feedback-steps">
+                        <div class="feedback-step">
+                            <div class="num">1</div>
+                            <div class="content">
+                                <div class="title">IDENTIFY (5 seconds)</div>
+                                <div class="desc">What is the feedback asking me to change? Write it in ONE sentence.</div>
+                            </div>
+                        </div>
+                        <div class="feedback-step">
+                            <div class="num">2</div>
+                            <div class="content">
+                                <div class="title">LOCATE (5 seconds)</div>
+                                <div class="desc">Where in my writing will I make the change? Point to the exact spot.</div>
+                            </div>
+                        </div>
+                        <div class="feedback-step">
+                            <div class="num">3</div>
+                            <div class="content">
+                                <div class="title">CHANGE (5 seconds)</div>
+                                <div class="desc">Make ONE change right now.</div>
+                            </div>
+                        </div>
+                        <div class="feedback-step">
+                            <div class="num">4</div>
+                            <div class="content">
+                                <div class="title">LOG (5 seconds)</div>
+                                <div class="desc">Add the lesson to your Common Errors list below.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>My Common Errors List</h3>
+                <p>Every time you get feedback, log the pattern here. Check this list before submitting future work.</p>
+
+                <table class="error-log">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Error Pattern</th>
+                            <th>How to Fix It</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td></td><td></td></tr>
+                        <tr><td>2</td><td></td><td></td></tr>
+                        <tr><td>3</td><td></td><td></td></tr>
+                        <tr><td>4</td><td></td><td></td></tr>
+                        <tr><td>5</td><td></td><td></td></tr>
+                        <tr><td>6</td><td></td><td></td></tr>
+                        <tr><td>7</td><td></td><td></td></tr>
+                        <tr><td>8</td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Before every submission:</strong> Scan this list. Check for these specific errors.</p>
+            </section>
+
+            <!-- Part 8: Essay Structure -->
+            <section>
+                <h2>Part 8: Essay Structure</h2>
+
+                <h3>The Basic Essay Blueprint</h3>
+
+                <div class="blueprint">
+                    <div class="section-title">INTRODUCTION</div>
+                    <div class="item">├── Hook: Grab attention (question, fact, scenario)</div>
+                    <div class="item">├── Context: Background the reader needs</div>
+                    <div class="item">└── Thesis: Your main argument + 2-3 reasons</div>
+
+                    <div class="section-title">BODY PARAGRAPH 1</div>
+                    <div class="item">├── Topic sentence (first reason from thesis)</div>
+                    <div class="item">├── Supporting details + elaboration</div>
+                    <div class="item">└── Transition to next paragraph</div>
+
+                    <div class="section-title">BODY PARAGRAPH 2</div>
+                    <div class="item">├── Topic sentence (second reason)</div>
+                    <div class="item">├── Supporting details + elaboration</div>
+                    <div class="item">└── Transition to next paragraph</div>
+
+                    <div class="section-title">BODY PARAGRAPH 3</div>
+                    <div class="item">├── Topic sentence (third reason)</div>
+                    <div class="item">├── Supporting details + elaboration</div>
+                    <div class="item">└── Lead into conclusion</div>
+
+                    <div class="section-title">CONCLUSION</div>
+                    <div class="item">├── Restate thesis (different words)</div>
+                    <div class="item">├── Summarize main points briefly</div>
+                    <div class="item">└── Final thought: Why this matters</div>
+                </div>
+
+                <h3>The Thesis Formula</h3>
+                <p><strong>Strong thesis = Your position + Your reasons</strong></p>
+
+                <div class="example-box">
+                    <div class="example-weak">
+                        "Video games are interesting."<br>
+                        <span style="font-size: 0.85rem; color: var(--gray-600);">(No clear position, no reasons)</span>
+                    </div>
+                    <div class="example-strong">
+                        "Video games should be used in education because they increase engagement, develop problem-solving skills, and teach collaboration."<br>
+                        <span style="font-size: 0.85rem; color: var(--gray-600);">(Clear position + three reasons that become body paragraphs)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 9: Quick Reference Cards -->
+            <section>
+                <h2>Part 9: Quick Reference Cards</h2>
+
+                <div class="ref-cards">
+                    <div class="ref-card">
+                        <h4>Card 1: The Routine</h4>
+                        <ol>
+                            <li>PLAN → Complete outline before drafting</li>
+                            <li>DRAFT → Write from the plan</li>
+                            <li>REVISE → Speed-bump + CUPS</li>
+                            <li>FEEDBACK → 20-second routine + log it</li>
+                        </ol>
+                    </div>
+
+                    <div class="ref-card">
+                        <h4>Card 2: Stuck? Try This</h4>
+                        <ul class="check-list" style="margin: 0; padding: 0;">
+                            <li>Add "because" to explain WHY</li>
+                            <li>Add "but" to show another side</li>
+                            <li>Add "so" to show a result</li>
+                            <li>Ask "So what?" and answer it</li>
+                            <li>Use a sentence starter</li>
+                            <li>Check your outline—what's next?</li>
+                        </ul>
+                    </div>
+
+                    <div class="ref-card">
+                        <h4>Card 3: Paragraph Check</h4>
+                        <ul class="check-list" style="margin: 0; padding: 0;">
+                            <li>Topic sentence states the main point</li>
+                            <li>2-3 supporting details</li>
+                            <li>Elaboration for each detail (So what?)</li>
+                            <li>Concluding sentence wraps it up</li>
+                        </ul>
+                    </div>
+
+                    <div class="ref-card">
+                        <h4>Card 4: Before You Submit</h4>
+                        <ul class="check-list" style="margin: 0; padding: 0;">
+                            <li>10-second pause</li>
+                            <li>Slow reread from the top</li>
+                            <li>Fix one obvious thing</li>
+                            <li>CUPS check</li>
+                            <li>Check Common Errors list</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 10: Growth Tracking -->
+            <section>
+                <h2>Part 10: Growth Tracking</h2>
+
+                <div class="growth-box">
+                    <h4>My Writing Goals</h4>
+
+                    <div class="growth-field">
+                        <label>This week I'm focusing on:</label>
+                        <div class="line"></div>
+                    </div>
+
+                    <div class="growth-field">
+                        <label>One habit I'm building:</label>
+                        <div class="line"></div>
+                    </div>
+
+                    <div class="growth-field">
+                        <label>One thing I've improved recently:</label>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Remember Section -->
+            <div class="remember">
+                <h2>Remember</h2>
+
+                <p>Writing is hard for everyone—including professional writers.</p>
+
+                <p>The difference between struggling writers and strong writers isn't talent. It's:</p>
+
+                <ol>
+                    <li><strong>Using the strategies</strong> — planning, structure, elaboration</li>
+                    <li><strong>Revising seriously</strong> — not rushing, using the checklist</li>
+                    <li><strong>Learning from feedback</strong> — applying it, logging it, not repeating errors</li>
+                </ol>
+
+                <p>You have the tools. Use them.</p>
+
+                <p class="final">Every piece of writing is a chance to get better. Take it.</p>
+            </div>
+        </main>
+
+        <footer>
+            Keep this toolkit open while you write. Refer to it before, during, and after every assignment.
+        </footer>
+    </div>
+</body>
+</html>
